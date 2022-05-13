@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="styles.css">
+    <script defer="defer" src="app.js"></script>
+    <title>9 Men's Morris</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="console flex">
+        <div class="fichasJugadorUno" data-capture="">
+          <h3>Jugador Uno</h3>
+          <div class="flex">
+            <h2 class="menNum">9</h2>
+            <h2 class="capNum">0</h2>
+          </div>
+        </div>
+        <div class="fichasJugadorDos" data-capture="">
+          <h3>Jugador Dos</h3>
+          <div class="flex">
+            <h2 class="menNum">9</h2>
+            <h2 class="capNum">0</h2>
+          </div>
+        </div>
+      </div>
+      <svg id="tablero" viewBox="-15 -15 450 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g class="lineas">
+          <rect x="12" y="12" width="396" height="396"></rect>
+          <rect x="79" y="79" width="262" height="262"></rect>
+          <rect x="145" y="145" width="130" height="130"></rect>
+          <line x1="212" y1="10" x2="212" y2="143"></line>
+          <line x1="212" y1="277" x2="212" y2="410"></line>
+          <line x1="143" y1="212" x2="10" y2="212"></line>
+          <line x1="410" y1="212" x2="277" y2="212"></line>
+        </g>
+        <g class="circulos">
+          <circle class="vacio" cx="10" cy="10" r="13"></circle>
+          <circle class="vacio" cx="10" cy="210" r="13"></circle>
+          <circle class="vacio" cx="10" cy="404" r="13"></circle>
+          <circle class="vacio" cx="77" cy="77" r="13"></circle>
+          <circle class="vacio" cx="77" cy="210" r="13"></circle>
+          <circle class="vacio" cx="77" cy="343" r="13"></circle>
+          <circle class="vacio" cx="145" cy="145" r="13"></circle>
+          <circle class="vacio" cx="145" cy="210" r="13"></circle>
+          <circle class="vacio" cx="145" cy="274" r="13"></circle>
+          <circle class="vacio" cx="212" cy="10" r="13"></circle>
+          <circle class="vacio" cx="212" cy="77" r="13"></circle>
+          <circle class="vacio" cx="212" cy="145" r="13"></circle>
+          <circle class="vacio" cx="213" cy="274" r="13"></circle>
+          <circle class="vacio" cx="213" cy="343" r="13"></circle>
+          <circle class="vacio" cx="213" cy="404" r="13"></circle>
+          <circle class="vacio" cx="276" cy="145" r="13"></circle>
+          <circle class="vacio" cx="276" cy="211" r="13"></circle>
+          <circle class="vacio" cx="276" cy="274" r="13"></circle>
+          <circle class="vacio" cx="343" cy="77" r="13"></circle>
+          <circle class="vacio" cx="343" cy="211" r="13"></circle>
+          <circle class="vacio" cx="343" cy="343" r="13"></circle>
+          <circle class="vacio" cx="410" cy="10" r="13"></circle>
+          <circle class="vacio" cx="410" cy="211" r="13"></circle>
+          <circle class="vacio" cx="410" cy="404" r="13"></circle>
+        </g>
+      </svg>
+    </div>
+  </body>
+</html>
