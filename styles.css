@@ -1,0 +1,190 @@
+@import url("https://fonts.googleapis.com/css2?family=Overpass&family=Roboto&display=swap");
+:root {
+  --color: rgb(202, 89, 95);
+  --colorDark: rgb(117, 52, 55);
+  --color2: rgb(95, 161, 95);
+  --color2Dark: rgb(68, 112, 68);
+  --colorBg: rgb(60, 133, 64);
+  --colorBg2: rgb(175, 202, 0);
+  --colorLine: #000000;
+  --highlight: gold;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  font-family: 'Overpass', sans-serif;
+  font-size: 16px;
+  background-color: var(--colorBg);
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+h2,
+h3 {
+  margin: 0.5rem 0;
+}
+
+.wrap {
+  width: 80%;
+  margin: 0 auto;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.console {
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  color: white;
+  text-align: center;
+  background-color: var(--colorLine);
+  border: 1px solid var(--colorBg2);
+  border-radius: 0 0 1.5rem 1.5rem;
+}
+
+@media (max-width: 420px) {
+  .console {
+    padding: 1.5rem 0 1.5rem 2.5rem;
+  }
+}
+
+.fichasJugadorUno,
+.fichasJugadorDos {
+  position: relative;
+}
+
+.fichasJugadorUno h3,
+.fichasJugadorDos h3 {
+  margin: 0;
+  padding-top: 0.5rem;
+  font-family: 'Robot', sans-serif;
+  font-weight: 300;
+  border-top: 3px solid var(--colorBg2);
+}
+
+.fichasJugadorUno h2,
+.fichasJugadorDos h2 {
+  padding: 1rem 0.75rem 0.75rem 0.75rem;
+  line-height: 1rem;
+  background-color: var(--colorBg2);
+  border-radius: 0.5rem;
+}
+
+.menNum::after, .capNum::after {
+  content: 'M E N';
+  position: absolute;
+  bottom: -15px;
+  left: 11px;
+  font-size: x-small;
+  font-weight: 500;
+}
+
+.capNum::after {
+  content: 'C A P';
+  right: -33px;
+}
+
+.fichasJugadorUno::before, .fichasJugadorDos::before {
+  /* content: '\f007'; */
+  position: absolute;
+  top: 2rem;
+  left: -3.5rem;
+  color: var(--colorDark);
+  font-family: 'Font Awesome 5 Free';
+  font-size: 3.5rem;
+}
+
+.fichasJugadorDos::before {
+  color: var(--color2Dark);
+}
+
+.fichasJugadorUno::after, .fichasJugadorDos::after {
+  content: attr(data-capture) "";
+  position: absolute;
+  top: 1.7rem;
+  left: -3.2rem;
+  color: var(--highlight);
+  opacity: 0.75;
+  font-family: 'Font Awesome 5 Free';
+  font-size: 2.5rem;
+}
+
+.fichasJugadorDos::after {
+  content: attr(data-capture);
+}
+
+#tablero {
+  width: 560px;
+  height: 560px;
+}
+
+@media (max-width: 420px) {
+  #tablero {
+    width: 360px;
+    height: 360px;
+  }
+}
+
+.lineas {
+  stroke: var(--colorLine);
+  stroke-width: 4;
+}
+
+.circulos {
+  fill: var(--colorBg2);
+  stroke: var(--colorLine);
+  stroke-width: 1px;
+}
+
+circle:hover {
+  fill-opacity: 80%;
+  stroke: white;
+  stroke-width: 2px;
+}
+
+@media (max-width: 420px) {
+  circle:hover {
+    stroke: none;
+  }
+}
+
+.jugador1 {
+  fill: var(--color);
+  fill-opacity: 100%;
+}
+
+.jugador2 {
+  fill: var(--color2);
+  fill-opacity: 100%;
+}
+
+/* .mill {
+  stroke: var(--highlight);
+  stroke-width: 2px;
+} */
