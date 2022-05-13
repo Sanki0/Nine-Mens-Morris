@@ -43,7 +43,7 @@ const jugador1Add = (e, btn, jugador, ...args) => {
 	fichasJugadorUno--
 	console.log("Quedan " + fichasJugadorUno + " fichas - Jugador1")
 	jugador1Marcador.children[1].children[0].innerHTML = fichasJugadorUno
-	jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(95, 161, 95)')
+	jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(0, 0, 0)')
 	turno = jugador2
 
 }
@@ -63,7 +63,7 @@ const jugador2Add = (e, btn, jugador, ...args) => {
 	fichasJugadorDos--
 	console.log("Quedan " + fichasJugadorDos + " fichas - Jugador2")
 	jugador2Marcador.children[1].children[0].innerHTML = fichasJugadorDos
-	jugador2Marcador.parentElement.style.setProperty('background-color', 'rgb(202, 89, 95)')
+	jugador2Marcador.parentElement.style.setProperty('background-color', 'rgb(250, 250, 250)')
 	turno = jugador1
 }
 
