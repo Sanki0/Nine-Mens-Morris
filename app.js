@@ -10,13 +10,15 @@ let fichasJugadorDos = 9;
 let jugador1 = 'jugador1';
 let jugador2 = 'jugador2';
 let turno = jugador1;
-
+let anteriorCX;
+let anteriorCY;
 let jugadorMolino = null;
 let Fase2 = false;
 
 
-const rollStart = e => {
-	let randomMath = Math.round(Math.random());
+//Funcion para rollear por quien empieza
+const roll = e => {
+	var randomMath = Math.round(Math.random());
 	randomMath === 0 ? (turno = jugador1) : (turno = jugador2);
 }
 
@@ -31,8 +33,7 @@ const movimientoValido = (e, btn, jugador, ...args) => {
 	}
 	if (anteriorCX === btn.attributes.cx.value && anteriorCY === btn.attributes.cy.value) {
 		return (valido = false)
-	}
-	
+	}	
 }
 
 
@@ -41,6 +42,7 @@ const jugador1Add = (e, btn, jugador, ...args) => {
 	if (movimientoValido(e, btn, jugador) === false) {
 		return
 	}
+	controles.children[1].disabled = true;
 	btn.classList.replace('vacio', jugador);
 	fichasJugadorUno--;
 	console.log('Quedan ' + fichasJugadorUno + ' fichas - Jugador1');
@@ -51,7 +53,13 @@ const jugador1Add = (e, btn, jugador, ...args) => {
 
 //Pendiente el mover fichas
 const jugador1Move = (e, btn, ...args) => {
+	controles.children[1].disabled = false;
 	btn.classList.replace(jugador1, 'vacio');
+	anteriorCX = btn.attributes.cx.value; 	//Verificamos coordenadas
+	anteriorCY = btn.attributes.cy.value;
+	lastDot = btn;
+	fichasJugadorUno++;
+	jugador1Marcador.children[1].children[0].innerHTML = fichasJugadorUno;	//Actualizamos marcador
 }
 
 
@@ -60,17 +68,24 @@ const jugador2Add = (e, btn, jugador, ...args) => {
 	if (movimientoValido(e, btn, jugador) === false) {
 		return
 	}
+	controles.children[1].disabled = true;
 	btn.classList.replace('vacio', jugador);
 	fichasJugadorDos--;
 	console.log('Quedan ' + fichasJugadorDos + ' fichas - Jugador2');
 	jugador2Marcador.children[1].children[0].innerHTML = fichasJugadorDos;
-	jugador2Marcador.parentElement.style.setProperty('background-color', 'rgb(250, 250, 250)');
+	jugador2Marcador.parentElement.style.setProperty('background-color', 'rgb(255, 255, 255)');
 	turno = jugador1;
 }
 
 //Falta completar la funcion de mover fichas
 const jugador2Move = (e, btn, ...args) => {
+	controles.children[1].disabled = false;
 	btn.classList.replace(jugador2, 'vacio');
+	anteriorCX = btn.attributes.cx.value;	//Verificamos coordenadas
+	anteriorCY = btn.attributes.cy.value;
+	lastDot = btn;
+	fichasJugadorDos++;
+	jugador2Marcador.children[1].children[0].innerHTML = fichasJugadorDos; //Actualizamos marcador
 }
 
 //Seccion de escucha de eventos 'click'
