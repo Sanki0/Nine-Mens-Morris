@@ -113,3 +113,14 @@ tablero.addEventListener('click', e => {
 		}
 	}
 })
+
+controles.addEventListener('click', e => {
+	let btn = e.target.closest('.btn');
+	if (!btn) return
+
+	btn.classList.contains('roll') ? (roll(), (btn.disabled = true)) : null
+
+	turno !== jugador1
+		? jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(0, 0, 0)')
+		: jugador2Marcador.parentElement.style.setProperty('background-color', 'rgb(255, 255, 255)')
+})
