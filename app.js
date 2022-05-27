@@ -2,6 +2,8 @@ const tablero = document.getElementById('tablero');
 const circulos = document.querySelectorAll('.circulos');
 const jugador1Marcador = document.querySelector('.fichasJugadorUno');
 const jugador2Marcador = document.querySelector('.fichasJugadorDos');
+const controles = document.querySelector('.controles');
+
 
 let fichasJugadorUno = 9;
 let fichasJugadorDos = 9;
