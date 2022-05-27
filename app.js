@@ -119,6 +119,23 @@ controles.addEventListener('click', e => {
 	if (!btn) return
 
 	btn.classList.contains('roll') ? (roll(), (btn.disabled = true)) : null
+	
+	if (btn.classList.contains('retroceder')) {
+		if (turno === jugador1) {
+			lastDot.classList.replace('vacio', jugador1);
+			fichasJugadorUno--;
+			//turno = jugador2
+			jugador1Marcador.children[1].children[0].innerHTML = fichasJugadorUno;
+			controles.children[1].disabled = true;
+		} else {
+			lastDot.classList.replace('vacio', jugador2);
+			fichasJugadorDos--;
+			//turno = jugador2
+			jugador2Marcador.children[1].children[0].innerHTML = fichasJugadorDos;
+			controles.children[1].disabled = true;
+		}
+		console.log(turno, fichasJugadorDos, fichasJugadorUno, lastDot);
+	}
 
 	turno !== jugador1
 		? jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(0, 0, 0)')
