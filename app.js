@@ -14,7 +14,7 @@ let anteriorCX;
 let anteriorCY;
 let jugadorMolino = null;
 let Fase2 = false;
-
+let ultimoCirculo = null;
 
 //Funcion para rollear por quien empieza
 const roll = e => {
@@ -57,7 +57,7 @@ const jugador1Move = (e, btn, ...args) => {
 	btn.classList.replace(jugador1, 'vacio');
 	anteriorCX = btn.attributes.cx.value; 	//Verificamos coordenadas
 	anteriorCY = btn.attributes.cy.value;
-	lastDot = btn;
+	ultimoCirculo = btn;
 	fichasJugadorUno++;
 	jugador1Marcador.children[1].children[0].innerHTML = fichasJugadorUno;	//Actualizamos marcador
 }
@@ -83,7 +83,7 @@ const jugador2Move = (e, btn, ...args) => {
 	btn.classList.replace(jugador2, 'vacio');
 	anteriorCX = btn.attributes.cx.value;	//Verificamos coordenadas
 	anteriorCY = btn.attributes.cy.value;
-	lastDot = btn;
+	ultimoCirculo = btn;
 	fichasJugadorDos++;
 	jugador2Marcador.children[1].children[0].innerHTML = fichasJugadorDos; //Actualizamos marcador
 }
@@ -122,19 +122,19 @@ controles.addEventListener('click', e => {
 	
 	if (btn.classList.contains('retroceder')) {
 		if (turno === jugador1) {
-			lastDot.classList.replace('vacio', jugador1);
+			ultimoCirculo.classList.replace('vacio', jugador1);
 			fichasJugadorUno--;
 			//turno = jugador2
 			jugador1Marcador.children[1].children[0].innerHTML = fichasJugadorUno;
 			controles.children[1].disabled = true;
 		} else {
-			lastDot.classList.replace('vacio', jugador2);
+			ultimoCirculo.classList.replace('vacio', jugador2);
 			fichasJugadorDos--;
 			//turno = jugador2
 			jugador2Marcador.children[1].children[0].innerHTML = fichasJugadorDos;
 			controles.children[1].disabled = true;
 		}
-		console.log(turno, fichasJugadorDos, fichasJugadorUno, lastDot);
+		console.log(turno, fichasJugadorDos, fichasJugadorUno, ultimoCirculo);
 	}
 
 	turno !== jugador1
