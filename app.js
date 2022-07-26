@@ -60,6 +60,41 @@ const movimientoValido = (e, btn, jugador, ...args) => {
 	} 
 }
 
+const ChequeoMolino = (e, btn, jugador, action, ...args) => {
+	var x = btn.attributes.cx.value;
+	var y = btn.attributes.cy.value;
+	var circulosJugador = document.querySelectorAll(`.${jugador}`);
+	console.log('circulos jugador ' + jugador + ' :' + circulosJugador.length);
+	var Xcoincidencia = 0;
+	var Ycoincidencia = 0;
+	var molino = [];
+
+	circulosJugador.forEach(punto => {
+		if (punto.cx.baseVal.value == x) {
+			Xcoincidencia++;
+			molino.push(punto);
+		}
+		if (punto.cy.baseVal.value == y) {
+			Ycoincidencia++;
+			molino.push(punto);
+		}
+	})
+	
+	if (Xcoincidencia >= 3 || Ycoincidencia >= 3) {
+		jugadorMolino = jugador;
+		jugadorMolino === jugador1
+			? ((jugador2Marcador.dataset.capture = iconoMolino),
+			  (turno = jugador1),
+			  jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(202, 89, 95)'))
+			: ((jugador1Marcador.dataset.capture = iconoMolino),
+			  (turno = jugador2),
+			  jugador2Marcador.parentElement.style.setProperty('background-color', 'rgb(95, 161, 95)'))
+		molino.forEach(punto => {
+			punto.classList.add('molino')
+		})
+	}
+}
+
 //Añadimos primeras 9 fichas jugador1
 const jugador1Add = (e, btn, jugador, ...args) => {
 	if (movimientoValido(e, btn, jugador) === false) {
