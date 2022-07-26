@@ -107,6 +107,7 @@ const jugador1Add = (e, btn, jugador, ...args) => {
 	jugador1Marcador.children[1].children[0].innerHTML = fichasJugadorUno;
 	jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(0, 0, 0)');
 	turno = jugador2;
+	ChequeoMolino(e, btn, jugador, 'add');		
 }
 
 //Pendiente el mover fichas
@@ -119,7 +120,28 @@ const jugador1Move = (e, btn, ...args) => {
 	fichasJugadorUno++;
 	jugador1Marcador.children[1].children[0].innerHTML = fichasJugadorUno;	//Actualizamos marcador
 }
-
+const jugador1Del = (e, btn, ...args) => {
+	if (ChequeoMolino(e, btn, jugador1, 'del')) {
+		return
+	}
+	console.log(ChequeoMolino(e, btn, jugador1, 'del'))
+	btn.classList.replace(jugador1, 'vacio')
+	jugador1Marcador.dataset.capture = ''
+	jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(202, 89, 95)')
+	var mills = document.querySelectorAll('.molino')
+	mills.forEach(punto => {
+		console.log(punto)
+		punto.classList.remove('molino')
+	})
+	jugadorMolino = false
+	fichasRemovidas2++
+	jugador2Marcador.children[1].children[1].innerHTML = fichasRemovidas2
+	turno = jugador1
+	fichasRemovidas2 >= 7
+		? ((jugador2Marcador.children[1].children[1].innerHTML = iconoGanador),
+		  jugador1Marcador.parentElement.style.setProperty('background-color', '#212841'))
+		: false
+}
 
 //Añadimos primeras 9 fichas jugador1
 const jugador2Add = (e, btn, jugador, ...args) => {
