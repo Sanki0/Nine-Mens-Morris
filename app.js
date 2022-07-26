@@ -17,20 +17,20 @@ let anteriorCY;
 let jugadorMolino = null;
 let Fase2 = false;
 let ultimoCirculo = null;
-var fichasRemovidas1 = 0
-var fichasRemovidas2 = 0			
-var error = false
-var juegoTerminado = false 
+let fichasRemovidas1 = 0;
+let fichasRemovidas2 = 0;			
+let error = false;
+let juegoTerminado = false; 
 
 //Funcion para rollear por quien empieza
 const roll = e => {
-	var randomMath = Math.round(Math.random());
+	let randomMath = Math.round(Math.random());
 	randomMath === 0 ? (turno = jugador1) : (turno = jugador2);
 }
 
 
 const movimientoValido = (e, btn, jugador, ...args) => {
-	var valido;
+	let valido;
 	if (jugadorMolino) {					//verificamos si existe un jugador que haya realizado un molino 
 		return (valido = false)
 	}
@@ -40,7 +40,7 @@ const movimientoValido = (e, btn, jugador, ...args) => {
 	if (anteriorCX === btn.attributes.cx.value && anteriorCY === btn.attributes.cy.value) {
 		return (valido = false)
 	}
-	var circulosJugador = document.querySelectorAll(`.${jugador}`)
+	let circulosJugador = document.querySelectorAll(`.${jugador}`)
 	console.log(circulosJugador.length)
 	if (circulosJugador.length <= 2 || juegoTerminado) {
 		juegoTerminado = true
@@ -48,7 +48,7 @@ const movimientoValido = (e, btn, jugador, ...args) => {
 	}
 	
 	valido = anteriorCX === btn.attributes.cx.value || anteriorCY === btn.attributes.cy.value ? true : false
-	return valido
+	return valido;
 
 	let emptycirculos = document.querySelectorAll(`.vacio`)
 	if (Fase2) {
@@ -61,13 +61,13 @@ const movimientoValido = (e, btn, jugador, ...args) => {
 }
 
 const ChequeoMolino = (e, btn, jugador, action, ...args) => {
-	var x = btn.attributes.cx.value;
-	var y = btn.attributes.cy.value;
-	var circulosJugador = document.querySelectorAll(`.${jugador}`);
+	let x = btn.attributes.cx.value;
+	let y = btn.attributes.cy.value;
+	let circulosJugador = document.querySelectorAll(`.${jugador}`);
 	console.log('circulos jugador ' + jugador + ' :' + circulosJugador.length);
-	var Xcoincidencia = 0;
-	var Ycoincidencia = 0;
-	var molino = [];
+	let Xcoincidencia = 0;
+	let Ycoincidencia = 0;
+	let molino = [];
 
 	circulosJugador.forEach(punto => {
 		if (punto.cx.baseVal.value == x) {
@@ -124,19 +124,19 @@ const jugador1Del = (e, btn, ...args) => {
 	if (ChequeoMolino(e, btn, jugador1, 'del')) {
 		return
 	}
-	console.log(ChequeoMolino(e, btn, jugador1, 'del'))
-	btn.classList.replace(jugador1, 'vacio')
+	console.log(ChequeoMolino(e, btn, jugador1, 'del'));
+	btn.classList.replace(jugador1, 'vacio');
 	jugador1Marcador.dataset.capture = ''
-	jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(202, 89, 95)')
-	var mills = document.querySelectorAll('.molino')
+	jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(202, 89, 95)');
+	let mills = document.querySelectorAll('.molino');
 	mills.forEach(punto => {
-		console.log(punto)
-		punto.classList.remove('molino')
+		console.log(punto);
+		punto.classList.remove('molino');
 	})
-	jugadorMolino = false
-	fichasRemovidas2++
-	jugador2Marcador.children[1].children[1].innerHTML = fichasRemovidas2
-	turno = jugador1
+	jugadorMolino = false;
+	fichasRemovidas2++;
+	jugador2Marcador.children[1].children[1].innerHTML = fichasRemovidas2;
+	turno = jugador1;
 	fichasRemovidas2 >= 7
 		? ((jugador2Marcador.children[1].children[1].innerHTML = iconoGanador),
 		  jugador1Marcador.parentElement.style.setProperty('background-color', '#212841'))
@@ -173,19 +173,19 @@ const jugador2Del = (e, btn, ...args) => {
 	if (ChequeoMolino(e, btn, jugador2, 'del')) {
 		return
 	}
-	console.log(ChequeoMolino(e, btn, jugador1, 'del'))
-	btn.classList.replace(jugador2, 'vacio')
-	jugador2Marcador.dataset.capture = ''
-	jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(95, 161, 95)')
-	var mills = document.querySelectorAll('.molino')
+	console.log(ChequeoMolino(e, btn, jugador1, 'del'));
+	btn.classList.replace(jugador2, 'vacio');
+	jugador2Marcador.dataset.capture = '';
+	jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(95, 161, 95)');
+	let mills = document.querySelectorAll('.molino');
 	mills.forEach(punto => {
-		console.log(punto)
-		punto.classList.remove('molino')
+		console.log(punto);
+		punto.classList.remove('molino');
 	})
-	jugadorMolino = false
-	fichasRemovidas1++
-	jugador1Marcador.children[1].children[1].innerHTML = fichasRemovidas1
-	turno = jugador2
+	jugadorMolino = false;
+	fichasRemovidas1++;
+	jugador1Marcador.children[1].children[1].innerHTML = fichasRemovidas1;
+	turno = jugador2;
 	fichasRemovidas1 >= 7
 		? ((jugador1Marcador.children[1].children[1].innerHTML = iconoGanador),
 		  jugador1Marcador.parentElement.style.setProperty('background-color', '#212841'))
@@ -243,4 +243,4 @@ controles.addEventListener('click', e => {
 	turno !== jugador1
 		? jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(0, 0, 0)')
 		: jugador2Marcador.parentElement.style.setProperty('background-color', 'rgb(255, 255, 255)')
-})
+})}
