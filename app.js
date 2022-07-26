@@ -155,9 +155,10 @@ const jugador2Add = (e, btn, jugador, ...args) => {
 	jugador2Marcador.children[1].children[0].innerHTML = fichasJugadorDos;
 	jugador2Marcador.parentElement.style.setProperty('background-color', 'rgb(255, 255, 255)');
 	turno = jugador1;
+	ChequeoMolino(e, btn, jugador, 'add');
 }
 
-//Falta completar la funcion de mover fichas
+//Movimiento fichas jugador2
 const jugador2Move = (e, btn, ...args) => {
 	controles.children[1].disabled = false;
 	btn.classList.replace(jugador2, 'vacio');
@@ -167,6 +168,28 @@ const jugador2Move = (e, btn, ...args) => {
 	fichasJugadorDos++;
 	jugador2Marcador.children[1].children[0].innerHTML = fichasJugadorDos; //Actualizamos marcador
 }
+
+const jugador2Del = (e, btn, ...args) => {
+	if (ChequeoMolino(e, btn, jugador2, 'del')) {
+		return
+	}
+	console.log(ChequeoMolino(e, btn, jugador1, 'del'))
+	btn.classList.replace(jugador2, 'vacio')
+	jugador2Marcador.dataset.capture = ''
+	jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(95, 161, 95)')
+	var mills = document.querySelectorAll('.molino')
+	mills.forEach(punto => {
+		console.log(punto)
+		punto.classList.remove('molino')
+	})
+	jugadorMolino = false
+	fichasRemovidas1++
+	jugador1Marcador.children[1].children[1].innerHTML = fichasRemovidas1
+	turno = jugador2
+	fichasRemovidas1 >= 7
+		? ((jugador1Marcador.children[1].children[1].innerHTML = iconoGanador),
+		  jugador1Marcador.parentElement.style.setProperty('background-color', '#212841'))
+		: false
 
 //Seccion de escucha de eventos 'click'
 tablero.addEventListener('click', e => {
