@@ -3,6 +3,8 @@ const circulos = document.querySelectorAll('.circulos');
 const jugador1Marcador = document.querySelector('.fichasJugadorUno');
 const jugador2Marcador = document.querySelector('.fichasJugadorDos');
 const controles = document.querySelector('.controles');
+const iconoMolino = '\u{0271}'
+const iconoGanador = 'W' 
 
 
 let fichasJugadorUno = 9;
@@ -15,6 +17,10 @@ let anteriorCY;
 let jugadorMolino = null;
 let Fase2 = false;
 let ultimoCirculo = null;
+var fichasRemovidas1 = 0
+var fichasRemovidas2 = 0			
+var error = false
+var juegoTerminado = false 
 
 //Funcion para rollear por quien empieza
 const roll = e => {
@@ -24,7 +30,7 @@ const roll = e => {
 
 
 const movimientoValido = (e, btn, jugador, ...args) => {
-	let valido;
+	var valido;
 	if (jugadorMolino) {					//verificamos si existe un jugador que haya realizado un molino 
 		return (valido = false)
 	}
@@ -33,9 +39,26 @@ const movimientoValido = (e, btn, jugador, ...args) => {
 	}
 	if (anteriorCX === btn.attributes.cx.value && anteriorCY === btn.attributes.cy.value) {
 		return (valido = false)
-	}	
-}
+	}
+	var circulosJugador = document.querySelectorAll(`.${jugador}`)
+	console.log(circulosJugador.length)
+	if (circulosJugador.length <= 2 || juegoTerminado) {
+		juegoTerminado = true
+		return (valido = true)
+	}
+	
+	valido = anteriorCX === btn.attributes.cx.value || anteriorCY === btn.attributes.cy.value ? true : false
+	return valido
 
+	let emptycirculos = document.querySelectorAll(`.vacio`)
+	if (Fase2) {
+		emptycirculos.forEach(punto => {
+			if ((punto.cx.baseVal.value = anteriorCX)) {
+			} else if ((punto.cy.baseVal.value = anteriorCY)) {
+			}
+		})
+	} 
+}
 
 //Añadimos primeras 9 fichas jugador1
 const jugador1Add = (e, btn, jugador, ...args) => {
