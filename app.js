@@ -3,8 +3,8 @@ const circulos = document.querySelectorAll('.circulos');
 const jugador1Marcador = document.querySelector('.fichasJugadorUno');
 const jugador2Marcador = document.querySelector('.fichasJugadorDos');
 const controles = document.querySelector('.controles');
-const iconoMolino = '\u{0271}'
-const iconoGanador = 'W' 
+const iconoMolino = '\u{0271}';
+const iconoGanador = 'W';
 
 
 let fichasJugadorUno = 9;
@@ -18,9 +18,9 @@ let jugadorMolino = null;
 let Fase2 = false;
 let ultimoCirculo = null;
 let fichasRemovidas1 = 0;
-let fichasRemovidas2 = 0;			
+let fichasRemovidas2 = 0;
 let error = false;
-let juegoTerminado = false; 
+let juegoTerminado = false;
 
 //Funcion para rollear por quien empieza
 const roll = e => {
@@ -40,24 +40,17 @@ const movimientoValido = (e, btn, jugador, ...args) => {
 	if (anteriorCX === btn.attributes.cx.value && anteriorCY === btn.attributes.cy.value) {
 		return (valido = false)
 	}
+
 	let circulosJugador = document.querySelectorAll(`.${jugador}`)
 	console.log(circulosJugador.length)
 	if (circulosJugador.length <= 2 || juegoTerminado) {
 		juegoTerminado = true
 		return (valido = true)
 	}
-	
+
 	valido = anteriorCX === btn.attributes.cx.value || anteriorCY === btn.attributes.cy.value ? true : false
 	return valido;
 
-	let emptycirculos = document.querySelectorAll(`.vacio`)
-	if (Fase2) {
-		emptycirculos.forEach(punto => {
-			if ((punto.cx.baseVal.value = anteriorCX)) {
-			} else if ((punto.cy.baseVal.value = anteriorCY)) {
-			}
-		})
-	} 
 }
 
 const ChequeoMolino = (e, btn, jugador, action, ...args) => {
@@ -79,16 +72,16 @@ const ChequeoMolino = (e, btn, jugador, action, ...args) => {
 			molino.push(punto);
 		}
 	})
-	
+
 	if (Xcoincidencia >= 3 || Ycoincidencia >= 3) {
 		jugadorMolino = jugador;
 		jugadorMolino === jugador1
 			? ((jugador2Marcador.dataset.capture = iconoMolino),
-			  (turno = jugador1),
-			  jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(202, 89, 95)'))
+				(turno = jugador1),
+				jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(202, 89, 95)'))
 			: ((jugador1Marcador.dataset.capture = iconoMolino),
-			  (turno = jugador2),
-			  jugador2Marcador.parentElement.style.setProperty('background-color', 'rgb(95, 161, 95)'))
+				(turno = jugador2),
+				jugador2Marcador.parentElement.style.setProperty('background-color', 'rgb(95, 161, 95)'))
 		molino.forEach(punto => {
 			punto.classList.add('molino')
 		})
@@ -107,7 +100,7 @@ const jugador1Add = (e, btn, jugador, ...args) => {
 	jugador1Marcador.children[1].children[0].innerHTML = fichasJugadorUno;
 	jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(0, 0, 0)');
 	turno = jugador2;
-	ChequeoMolino(e, btn, jugador, 'add');		
+	ChequeoMolino(e, btn, jugador, 'add');
 }
 
 //Pendiente el mover fichas
@@ -120,6 +113,7 @@ const jugador1Move = (e, btn, ...args) => {
 	fichasJugadorUno++;
 	jugador1Marcador.children[1].children[0].innerHTML = fichasJugadorUno;	//Actualizamos marcador
 }
+
 const jugador1Del = (e, btn, ...args) => {
 	if (ChequeoMolino(e, btn, jugador1, 'del')) {
 		return
@@ -139,7 +133,7 @@ const jugador1Del = (e, btn, ...args) => {
 	turno = jugador1;
 	fichasRemovidas2 >= 7
 		? ((jugador2Marcador.children[1].children[1].innerHTML = iconoGanador),
-		  jugador1Marcador.parentElement.style.setProperty('background-color', '#212841'))
+			jugador1Marcador.parentElement.style.setProperty('background-color', '#212841'))
 		: false
 }
 
@@ -188,8 +182,9 @@ const jugador2Del = (e, btn, ...args) => {
 	turno = jugador2;
 	fichasRemovidas1 >= 7
 		? ((jugador1Marcador.children[1].children[1].innerHTML = iconoGanador),
-		  jugador1Marcador.parentElement.style.setProperty('background-color', '#212841'))
+			jugador1Marcador.parentElement.style.setProperty('background-color', '#212841'))
 		: false
+}
 
 //Seccion de escucha de eventos 'click'
 tablero.addEventListener('click', e => {
@@ -207,12 +202,18 @@ tablero.addEventListener('click', e => {
 			console.log('Probando condición mover');
 			Fase2 = true;
 			jugador1Move(e, btn);
-		} 
+		} else if (jugadorMolino === jugador2) {
+			console.log('eliminando');
+			jugador1Del(e, btn);
+		}
 		//jugador 2
 	} else {
 		if (turno === jugador2 && fichasJugadorDos <= 0 && !jugadorMolino) {
 			Fase2 = true;
 			jugador2Move(e, btn);
+		} else if (jugadorMolino === jugador1) {
+			console.log('eliminando');
+			jugador2Del(e, btn);
 		}
 	}
 })
@@ -222,7 +223,7 @@ controles.addEventListener('click', e => {
 	if (!btn) return
 
 	btn.classList.contains('roll') ? (roll(), (btn.disabled = true)) : null
-	
+
 	if (btn.classList.contains('retroceder')) {
 		if (turno === jugador1) {
 			ultimoCirculo.classList.replace('vacio', jugador1);
@@ -243,4 +244,4 @@ controles.addEventListener('click', e => {
 	turno !== jugador1
 		? jugador1Marcador.parentElement.style.setProperty('background-color', 'rgb(0, 0, 0)')
 		: jugador2Marcador.parentElement.style.setProperty('background-color', 'rgb(255, 255, 255)')
-})}
+})
